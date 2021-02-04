@@ -1,0 +1,34 @@
+<app-modal htmlId="assetEventDetailsModal" aria-label="assetEventDetailsModal" sizeType="large">
+    <app-modal-header headerLabel="{{ 'ASSETS.EVENTS.DETAILS.TITLE' | translate }}"></app-modal-header>
+    <app-modal-body class="md-margin">
+        <div class="md-alert-banner md-alert-banner--info" role="alert">
+            <strong>{{ 'TIMEZONE.UTC.INFO.TITLE' | translate }}</strong> {{ 'TIMEZONE.UTC.INFO.DESCRIPTION' | translate }}
+        </div>
+        <ngx-json-viewer [json]="assetEventDto" [expanded]="expandJsonView"></ngx-json-viewer>
+    </app-modal-body>
+    <app-modal-footer>
+        <button
+            app-button
+            type="button"
+            id="expandJsonViewBtn"
+            color="blue"
+            attr.aria-label="{{
+                (expandJsonView ? 'ASSETS.EVENTS.DETAILS.COLLAPSE.LABEL' : 'ASSETS.EVENTS.DETAILS.EXPAND.LABEL') | translate
+            }}"
+            (click)="onToggleJsonView()"
+        >
+            {{ (expandJsonView ? 'ASSETS.EVENTS.DETAILS.COLLAPSE.LABEL' : 'ASSETS.EVENTS.DETAILS.EXPAND.LABEL') | translate }}
+        </button>
+        <button
+            app-button
+            type="button"
+            color="blue"
+            id="copyEventDetailsToClipBoard"
+            attr.aria-label="{{ 'ASSETS.EVENTS.DETAILS.COPY_TO_CLIPBOARD.LABEL' | translate }}"
+            [appCopyToClipboard]="json.stringify(assetEventDto)"
+            (copied)="onCopyToClipboardFinished()"
+        >
+            {{ 'ASSETS.EVENTS.DETAILS.COPY_TO_CLIPBOARD.LABEL' | translate }}
+        </button>
+    </app-modal-footer>
+</app-modal>
